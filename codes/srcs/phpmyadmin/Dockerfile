@@ -13,6 +13,6 @@ COPY	./srcs/localhost.conf /tmp/
 COPY	./srcs/config.inc.php /tmp/
 COPY	./srcs/phpMyAdmin-5.0.4-all-languages.tar.gz /tmp/
 
-EXPOSE 80 5000
+EXPOSE 80
 
 ENTRYPOINT [ "/tmp/init.sh" ]

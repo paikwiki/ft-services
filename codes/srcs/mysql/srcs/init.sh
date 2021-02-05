@@ -5,6 +5,7 @@ if [[ ! -d /var/run/mysqld ]]; then
 	chown -R mysql:mysql /var/run/mysqld
 fi
 
+chmod 444 /tmp/mariadb-server.cnf
 mv -f /tmp/mariadb-server.cnf /etc/my.cnf.d/
 
 nohup sh /tmp/init_mysql.sh &

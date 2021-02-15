@@ -3,7 +3,7 @@
 FROM		alpine:3.12.1
 
 RUN			apk update
-RUN			apk add nginx openssh-server
+RUN			apk add nginx openrc openssh-server
 
 COPY		./srcs/index.html /var/lib/nginx/html/
 COPY		./srcs/init.sh /tmp/

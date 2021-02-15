@@ -3,10 +3,13 @@
 ssh-keygen -A
 adduser --disabled-password nginx_user
 echo "nginx_user:password" | chpasswd
-/usr/sbin/sshd
 
 mv /tmp/localhost.conf /etc/nginx/conf.d/
 rm /etc/nginx/conf.d/default.conf
+
+# /usr/sbin/sshd
+rc-status && touch /run/openrc/softlevel
+rc-service sshd start
 
 # mkdir -p /var/run/nginx
 #   nginx pid를 생성하기 위해 필요한 명령

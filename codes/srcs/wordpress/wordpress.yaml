@@ -25,12 +25,15 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  annotations:
+    metallb.universe.tf/allow-shared-ip: shared
   name: wordpress
   labels:
     app: wordpress
 spec:
   selector:
     app: wordpress
+  type: LoadBalancer
   ports:
     - port: 5050
       name: wordpress

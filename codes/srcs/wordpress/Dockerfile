@@ -17,6 +17,6 @@ COPY		./srcs/init.sh /tmp/
 COPY		./srcs/localhost.conf /tmp/
 COPY		./srcs/wordpress-5.5.3.tar.gz /tmp/
 
-EXPOSE		80
+EXPOSE		5050
 
 ENTRYPOINT	[ "/tmp/init.sh" ]

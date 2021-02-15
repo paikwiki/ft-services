@@ -1,7 +1,7 @@
 #!/bin/sh
 
 minikube start --driver=virtualbox \
-			--bootstrapper=kubeadm	\
+			# --bootstrapper=kubeadm	\
 			--extra-config=kubelet.authentication-token-webhook=true \
 			--extra-config=apiserver.service-node-port-range=3000-35000
 
@@ -21,9 +21,9 @@ kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manife
 kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
 kubectl apply -f ./srcs/metallb_config.yaml
 
+docker build -t service-wordpress ./srcs/wordpress/
 docker build -t service-mysql ./srcs/mysql/
 docker build -t service-phpmyadmin ./srcs/phpmyadmin/
-docker build -t service-wordpress ./srcs/wordpress/
 docker build -t service-nginx ./srcs/nginx/
 
 kubectl apply -f ./srcs/mysql/mysql.yaml

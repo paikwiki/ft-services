@@ -2,7 +2,7 @@
 
 # https://wordpress.org/wordpress-5.5.3.tar.gz
 tar -xf /tmp/wordpress-5.5.3.tar.gz -C /tmp/
-mv -f /tmp/wordpress /var/www/
+mv -f /tmp/wordpress /var/www
 
 mv /tmp/localhost.conf /etc/nginx/conf.d/
 rm /etc/nginx/conf.d/default.conf
@@ -27,5 +27,4 @@ echo "wordpress:password" | chpasswd
 chmod -R 755 /var/www/
 chown -R wordpress:wordpress /var/www/wordpress
 
-php-fpm7 & nginx -g "daemon on;"
-sh
+php-fpm7 & nginx -g "daemon off;"

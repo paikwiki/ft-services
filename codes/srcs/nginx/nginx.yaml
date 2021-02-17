@@ -27,7 +27,7 @@ spec:
           #   initialDelaySeconds: 5
           #   periodSeconds: 5
           #   tcpSocket:
-          #     port: 2020
+          #     port: 22
 ---
 apiVersion: v1
 kind: Service

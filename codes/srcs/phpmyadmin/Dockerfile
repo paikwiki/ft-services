@@ -13,7 +13,6 @@ RUN			apk add php7-fpm php7-session
 
 COPY		./srcs/init.sh /tmp/
 COPY		./srcs/localhost.conf /tmp/
-COPY		./srcs/config.inc.php /tmp/
 COPY		./srcs/phpMyAdmin-5.0.4-all-languages.tar.gz /tmp/
 
 EXPOSE		5000

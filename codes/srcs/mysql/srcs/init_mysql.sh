@@ -6,7 +6,7 @@ done
 
 mysql << EOF
 CREATE DATABASE wordpress;
-CREATE USER 'wordpress'@'localhost' IDENTIFIED BY 'password';
-GRANT ALL ON *.* TO 'wordpress'@'localhost' WITH GRANT OPTION;
+CREATE USER 'admin'@'localhost' IDENTIFIED BY 'password';
+GRANT ALL ON *.* TO 'admin'@'localhost' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 EOF

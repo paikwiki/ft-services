@@ -4,5 +4,4 @@ datadir = /data
 port = 3306
 log-bin = /data/mysql-bin
 bind-address = 0.0.0.0
-skip-networking = false
-socket = /run/mysqld/mysqld.sock
+

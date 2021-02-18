@@ -104,4 +104,5 @@ data:
      */
     $cfg['UploadDir'] = '';
     $cfg['SaveDir'] = '';
+    $cfg['PmaAbsoluteUri'] = '/phpmyadmin/';
 

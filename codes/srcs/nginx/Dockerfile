@@ -7,8 +7,8 @@ RUN			apk add nginx openrc openssh-server
 
 COPY		./srcs/index.html /var/lib/nginx/html/
 COPY		./srcs/init.sh /tmp/
-COPY		./srcs/localhost.conf /tmp/
-COPY		./srcs/proxy.conf /tmp/
+# COPY		./srcs/localhost.conf /tmp/
+# COPY		./srcs/proxy.conf /tmp/
 
 EXPOSE		80 22
 

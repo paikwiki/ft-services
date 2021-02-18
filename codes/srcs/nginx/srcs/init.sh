@@ -4,8 +4,8 @@ ssh-keygen -A
 adduser --disabled-password nginx_user
 echo "nginx_user:password" | chpasswd
 
-mv /tmp/localhost.conf /etc/nginx/conf.d/
-mv /tmp/proxy.conf /etc/nginx/conf.d/
+# mv /tmp/localhost.conf /etc/nginx/conf.d/
+# mv /tmp/proxy.conf /etc/nginx/conf.d/
 rm /etc/nginx/conf.d/default.conf
 
 # /usr/sbin/sshd

@@ -17,12 +17,22 @@ spec:
       labels:
         app: nginx
     spec:
+      volumes:
+      - name: configmap-volumes
+        configMap:
+          name: nginx-configmap
+      - name: proxy-volumes
+        configMap:
+          name: nginxproxy
       containers:
         - name: nginx
           image: service-nginx
           imagePullPolicy: Never
           ports:
-            - containerPort: 80
+          - containerPort: 80
+          volumeMounts:
+          - mountPath: /etc/nginx/conf.d
+            name: configmap-volumes
           # livenessProbe:
           #   initialDelaySeconds: 5
           #   periodSeconds: 5

@@ -5,7 +5,6 @@ minikube start --driver=virtualbox \
 			--extra-config=apiserver.service-node-port-range=3000-35000
 
 minikube addons enable metallb
-eval $(minikube docker-env)
 
 kubectl get configmap kube-proxy -n kube-system -o yaml | \
 sed -e "s/strictARP: false/strictARP: true/" | \
@@ -17,6 +16,8 @@ kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manife
 kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
 kubectl apply -f ./srcs/metallb_config.yaml
 
+eval $(minikube docker-env)
+
 docker build -t service-wordpress ./srcs/wordpress/
 docker build -t service-mysql ./srcs/mysql/
 docker build -t service-phpmyadmin ./srcs/phpmyadmin/
@@ -25,7 +26,6 @@ docker build -t service-influxdb ./srcs/influxdb/
 docker build -t service-grafana ./srcs/grafana/
 docker build -t service-telegraf ./srcs/telegraf/
 
-kubectl create configmap nginx-configmap --from-file=./srcs/nginx/srcs/localhost.conf --from-file=./srcs/nginx/srcs/proxy.conf
 kubectl apply -f ./srcs/mysql/mysql.yaml
 kubectl apply -f ./srcs/phpmyadmin/phpmyadmin.yaml
 kubectl apply -f ./srcs/wordpress/wordpress.yaml

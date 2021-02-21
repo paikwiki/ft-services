@@ -1,7 +1,6 @@
 [mysqld]
-user = root
-datadir = /data
-port = 3306
-log-bin = /data/mysql-bin
-bind-address = 0.0.0.0
+user=root
+port=3306
+skip-networking=0
+bind-address=0.0.0.0
 

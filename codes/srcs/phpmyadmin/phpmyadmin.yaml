@@ -23,9 +23,8 @@ spec:
             - containerPort: 5000
           volumeMounts:
             - name: phpmyadmin-config
-              subPath: config.inc.php
-              mountPath: /www/config.inc.php
-              readOnly: true
+              mountPath: /var/www/phpmyadmin/conf_dir
+              readOnly: false
           livenessProbe:
             httpGet:
               port: 5000
@@ -105,4 +104,3 @@ data:
     $cfg['UploadDir'] = '';
     $cfg['SaveDir'] = '';
     $cfg['PmaAbsoluteUri'] = '/phpmyadmin/';
-

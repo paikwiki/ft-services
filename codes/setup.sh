@@ -26,14 +26,35 @@ docker build -t service-influxdb ./srcs/influxdb/
 docker build -t service-grafana ./srcs/grafana/
 docker build -t service-telegraf ./srcs/telegraf/
 
+kubectl apply -f ./srcs/nginx/nginx.yaml
 kubectl apply -f ./srcs/mysql/mysql.yaml
 kubectl apply -f ./srcs/phpmyadmin/phpmyadmin.yaml
-kubectl apply -f ./srcs/wordpress/wordpress.yaml
-kubectl apply -f ./srcs/nginx/nginx.yaml
 kubectl apply -f ./srcs/influxdb/influxdb.yaml
 kubectl apply -f ./srcs/influxdb/influxdb_conf.yaml
 kubectl apply -f ./srcs/grafana/grafana.yaml
 kubectl apply -f ./srcs/telegraf/telegraf.yaml
 
-# kubectl delete -f ./srcs/phpmyadmin/phpmyadmin.yaml;kubectl delete -f ./srcs/mysql/mysql.yaml
-# kubectl port-forward phpmyadmin-7cf4c5c785-mz25w 5000:80 -n default
+extern_ip="$(kc get services|grep nginx|awk '{print $4}')"
+cat ./srcs/wordpress/wordpress-config-template.yaml | \
+sed -e "s/FT_SITEURL/$(echo -n $extern_ip):5050/" > ./srcs/wordpress/wordpress-config.yaml
+
+kubectl apply -f ./srcs/wordpress/wordpress.yaml
+kubectl apply -f ./srcs/wordpress/wordpress-config.yaml
+
+# mk stop; . delete.sh ; mk delete ; . setup.sh
+
+echo -en "\a";
+echo -en "\a"
+echo -en "\a"
+sleep 1
+echo -en "\a"
+echo -en "\a"
+echo -en "\a"
+sleep 1
+echo -en "\a"
+echo -en "\a"
+echo -en "\a"
+sleep 1
+echo -en "\a"
+echo -en "\a"
+echo -en "\a"

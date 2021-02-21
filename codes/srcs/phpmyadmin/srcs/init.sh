@@ -1,8 +1,10 @@
 #!bin/sh
 
 # https://files.phpmyadmin.net/phpMyAdmin/5.0.4/phpMyAdmin-5.0.4-all-languages.tar.gz
-tar -xf /tmp/phpMyAdmin-5.0.4-all-languages.tar.gz -C /tmp/
-mv -f /tmp/phpMyAdmin-5.0.4-all-languages /var/www/phpmyadmin
+mv -f /tmp/phpMyAdmin-5.0.4-all-languages.tar.gz /var/www/
+tar -xf /var/www/phpMyAdmin-5.0.4-all-languages.tar.gz -C /var/www/
+mv /var/www/phpMyAdmin-5.0.4-all-languages/* /var/www/phpmyadmin/
+rm -rf /var/www/phpMyAdmin-5.0.4-all-languages*
 
 mv /tmp/localhost.conf /etc/nginx/conf.d/
 rm /etc/nginx/conf.d/default.conf
@@ -10,5 +12,7 @@ rm /etc/nginx/conf.d/default.conf
 if [[ ! -d /var/run/nginx ]]; then
 	mkdir -p /var/run/nginx
 fi
+ln -s /var/www/phpmyadmin/conf_dir/config.inc.php \
+		/var/www/phpmyadmin/config.inc.php
 
 php-fpm7 & nginx -g "daemon off;"

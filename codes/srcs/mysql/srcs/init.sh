@@ -1,18 +1,14 @@
 #! /bin/sh
 
-if [[ ! -d /run/mysqld ]]; then
-	mkdir -p /run/mysqld
-	chown -R mysql:mysql /run/mysqld
-fi
-
+mv /tmp/mariadb /etc/init.d/
 chmod 444 /tmp/mariadb-server.cnf
 mv -f /tmp/mariadb-server.cnf /etc/my.cnf.d/
 
-nohup sh /tmp/init_mysql.sh &
+rc-status && touch /run/openrc/softlevel && rc-service mariadb setup
 
-if [[ ! -d /data/mysql ]]; then
-	mkdir -p /data/mysql
-	/usr/bin/mysql_install_db --user=root --datadir=/data
+if [[ ! -d /run/mysqld ]]; then
+	mkdir -p /run/mysqld
 fi
 
-/usr/bin/mysqld --user=root --console
+mysqld --user=root --bootstrap < /tmp/init_mysql.sql
+mysqld --user=root --console

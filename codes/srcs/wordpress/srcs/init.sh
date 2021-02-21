@@ -30,4 +30,5 @@ echo "admin:password" | chpasswd
 chmod -R 755 /var/www/wordpress
 chown -R admin:admin /var/www/wordpress
 ln -s /var/www/wordpress/conf_dir/wp-config.php /var/www/wordpress/wp-config.php
+
 php-fpm7 & nginx -g "daemon off;"

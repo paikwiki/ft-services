@@ -6,7 +6,7 @@ RUN			apk add telegraf \
 				--repository http://dl-2.alpinelinux.org/alpine/edge/community/
 ENV			API_URL=https://kubernetes
 
-COPY		setup.sh /tmp/
+COPY		./srcs/setup.sh /tmp/
 
 EXPOSE		8086
 

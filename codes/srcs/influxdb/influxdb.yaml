@@ -67,6 +67,8 @@ kind: ConfigMap
 metadata:
   name: influxdb-config
   namespace: default
+  labels:
+    app: influxdb
 data:
   influxdb.conf: |
     [meta]
@@ -82,6 +84,8 @@ kind: ConfigMap
 metadata:
   name: telegraf-config
   namespace: default
+  labels:
+    app: influxdb
 data:
   kubernetes.conf: |
     [[inputs.kubernetes]]

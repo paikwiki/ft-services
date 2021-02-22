@@ -12,6 +12,8 @@ echo "admin:password" | chpasswd
 rc-status && touch /run/openrc/softlevel
 rc-service sshd start
 
+ln -s /var/www/conf_dir/index.html /var/www/index.html
+
 # mkdir -p /var/run/nginx
 #   nginx pid를 생성하기 위해 필요한 명령
 #   실행하지 않을 경우 "[emerg] open() "/run/nginx/nginx.pid" failed \

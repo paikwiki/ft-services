@@ -38,8 +38,10 @@ kubectl apply -f ./srcs/grafana/grafana.yaml
 kubectl apply -f ./srcs/ftps/ftps.yaml
 kubectl apply -f ./srcs/wordpress/wordpress.yaml
 kubectl apply -f ./srcs/wordpress/wordpress-config.yaml
-cat ./srcs/nginx/srcs/index-template.html | \
-sed -e "s/FT_SITEIP/$(kubectl get services|grep wordpress|awk '{print $4}')/" \
-> ./srcs/nginx/srcs/index.html
-cat ./srcs/nginx/srcs/index.html
+SITEIP="$(kubectl get services|grep wordpress|awk '{print $4}')";
+cat ./srcs/nginx/nginx-index-config-template.yaml | \
+sed -e "s/FT_SITEIP/$(echo -n $SITEIP)/" > ./srcs/nginx/nginx-index-config.yaml
+diff ./srcs/nginx/nginx-index-config-template.yaml \
+		./srcs/nginx/nginx-index-config.yaml
+kubectl apply -f ./srcs/nginx/nginx-index-config.yaml
 kubectl apply -f ./srcs/nginx/nginx.yaml

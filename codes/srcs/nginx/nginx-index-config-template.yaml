@@ -1,0 +1,25 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-index-config
+  labels:
+    app: nginx
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html lang="ko">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>FT_SERVICES</title>
+    </head>
+    <body>
+      <h1>FT_SERVICES by cbaek</h1>
+      <ul>
+        <li><a href="https://FT_SITEIP/wordpress/">Wordpress</a></li>
+        <li><a href="https://FT_SITEIP/phpmyadmin/">PhpMyAdmin</a></li>
+        <li><a href="http://FT_SITEIP:3000">Grafana</a></li>
+      </ul>
+    </body>
+    </html>

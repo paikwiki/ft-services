@@ -5,7 +5,6 @@ FROM		alpine:3.12.1
 RUN			apk update
 RUN			apk add openrc nginx openssh --no-cache --quiet
 
-COPY		./srcs/index.html /var/www/
 COPY		./srcs/init.sh /tmp/
 
 EXPOSE		80 22

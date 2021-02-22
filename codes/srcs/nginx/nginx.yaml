@@ -27,12 +27,17 @@ spec:
         volumeMounts:
         - mountPath: /etc/nginx/conf.d
           name: nginx-config
+        - mountPath: /var/www/conf_dir
+          name: nginx-index-config
         - mountPath: /etc/nginx/ssl
           name: secret-volumes
       volumes:
       - name: nginx-config
         configMap:
           name: nginx-config
+      - name: nginx-index-config
+        configMap:
+          name: nginx-index-config
       - name: secret-volumes
         secret:
           secretName: nginx-secret

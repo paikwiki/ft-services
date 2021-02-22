@@ -88,7 +88,7 @@ data:
     # ftp_data_port=20
     pasv_enable=YES
     seccomp_sandbox=NO
-    pasv_address=ftps
+    pasv_address=192.168.99.100
     pasv_min_port=20000
     pasv_max_port=20001
     # ##################
@@ -120,5 +120,3 @@ data:
     log_ftp_protocol=YES
     rsa_cert_file=/etc/ssl/certs/vsftpd.crt
     rsa_private_key_file=/etc/ssl/private/vsftpd.key
-    local_root=/var/ftp/$USER
-    user_sub_token=$USER

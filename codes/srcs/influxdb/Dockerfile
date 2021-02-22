@@ -1,11 +1,16 @@
-FROM		alpine:3.12.1
+FROM alpine:3.12.0
+#FROM alpine
 
-RUN			apk update
-RUN			apk add influxdb --no-cache --quiet
+RUN apk update
+RUN apk add influxdb curl jq
+RUN apk add telegraf \
+    --repository http://dl-2.alpinelinux.org/alpine/edge/community/
+#   --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/
 
-RUN			mkdir -p /etc/influxdb
-RUN			mkdir -p /var/lib/influxdb
+ENV API_URL=https://kubernetes
+#RUN export TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
 
-EXPOSE		8086
+COPY setup.sh /tmp/
 
-ENTRYPOINT	["/usr/sbin/influxd"]
+EXPOSE 8086
+ENTRYPOINT ["/tmp/setup.sh"]

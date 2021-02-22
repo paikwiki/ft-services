@@ -1,20 +1,22 @@
-FROM		alpine:3.12.1
+FROM alpine:3.12.0
+#FROM alpine:3.11.6
+#FROM alpine
 
-COPY		./srcs/* /tmp/
-COPY		./srcs/dashboards/ /tmp/dashboards/
-RUN			chmod 777 -R /tmp/*
+WORKDIR /usr/share/grafana
 
-RUN			apk update
-RUN			apk add openrc
-RUN			apk add libc6-compat --no-cache \
-				--repository=http://dl-cdn.alpinelinux.org/alpine/edge/main
-# RUN			apk add grafana=7.3.6-r0 --repository=https://dl-cdn.alpinelinux.org/alpine/latest-stable/community/
-RUN			apk add /tmp/grafana-7.3.6-r0.apk
-RUN			mv /tmp/dashboards/* /usr/share/grafana/public/dashboards/
-RUN			mv /tmp/influxdb_info.yaml \
-				/usr/share/grafana/conf/provisioning/datasources/
-RUN			mv /tmp/dashboards.yaml \
-				/usr/share/grafana/conf/provisioning/dashboards/
-EXPOSE		3000
+RUN apk update
+RUN apk add grafana \
+	--repository http://dl-cdn.alpinelinux.org/alpine/v3.13/community/
 
-ENTRYPOINT	["/tmp/init.sh"]
+#RUN apk add grafana \
+#	--repository http://dl-cdn.alpinelinux.org/alpine/v3.13/community/
+#	 --repository http://dl-2.alpinelinux.org/alpine/edge/community/
+#    --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/
+
+#COPY srcs/datasources.yml /usr/share/grafana/conf/provisioning/datasources/
+#COPY srcs/dashboards.yml /usr/share/grafana/conf/provisioning/dashboards/
+COPY dashboards/ /usr/share/grafana/public/dashboards/
+
+EXPOSE 3000
+
+ENTRYPOINT ["/usr/sbin/grafana-server", "web"]

@@ -12,7 +12,10 @@ rm /etc/nginx/conf.d/default.conf
 if [[ ! -d /var/run/nginx ]]; then
 	mkdir -p /var/run/nginx
 fi
+
 ln -s /var/www/phpmyadmin/conf_dir/config.inc.php \
 		/var/www/phpmyadmin/config.inc.php
+mkdir -p /var/www/phpmyadmin/tmp
+chmod 777 /var/www/phpmyadmin/tmp
 
 php-fpm7 & nginx -g "daemon off;"

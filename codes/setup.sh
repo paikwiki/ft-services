@@ -24,37 +24,37 @@ docker build -t service-phpmyadmin ./srcs/phpmyadmin/
 docker build -t service-nginx ./srcs/nginx/
 docker build -t service-influxdb ./srcs/influxdb/
 docker build -t service-grafana ./srcs/grafana/
-docker build -t service-telegraf ./srcs/telegraf/
+# docker build -t service-telegraf ./srcs/telegraf/
+docker build -t service-ftps ./srcs/ftps/
 
 kubectl apply -f ./srcs/nginx/nginx.yaml
+extern_ip="$(kubectl get services|grep nginx|awk '{print $4}')"
 kubectl apply -f ./srcs/mysql/mysql.yaml
 kubectl apply -f ./srcs/phpmyadmin/phpmyadmin.yaml
 kubectl apply -f ./srcs/influxdb/influxdb.yaml
-kubectl apply -f ./srcs/influxdb/influxdb_conf.yaml
+# kubectl apply -f ./srcs/influxdb/influxdb_conf.yaml
 kubectl apply -f ./srcs/grafana/grafana.yaml
-kubectl apply -f ./srcs/telegraf/telegraf.yaml
+# kubectl apply -f ./srcs/telegraf/telegraf.yaml
+kubectl apply -f ./srcs/ftps/ftps.yaml
 
-extern_ip="$(kc get services|grep nginx|awk '{print $4}')"
-cat ./srcs/wordpress/wordpress-config-template.yaml | \
-sed -e "s/FT_SITEURL/$(echo -n $extern_ip):5050/" > ./srcs/wordpress/wordpress-config.yaml
+# cat ./srcs/wordpress/wordpress-config-template.yaml | \
+# sed -e "s/FT_SITEURL/$(echo -n $extern_ip):5050/" > ./srcs/wordpress/wordpress-config.yaml
 
 kubectl apply -f ./srcs/wordpress/wordpress.yaml
 kubectl apply -f ./srcs/wordpress/wordpress-config.yaml
 
 # mk stop; . delete.sh ; mk delete ; . setup.sh
 
-echo -en "\a";
-echo -en "\a"
 echo -en "\a"
 sleep 1
 echo -en "\a"
-echo -en "\a"
+sleep 1
 echo -en "\a"
 sleep 1
 echo -en "\a"
-echo -en "\a"
+sleep 1
 echo -en "\a"
 sleep 1
 echo -en "\a"
-echo -en "\a"
+sleep 1
 echo -en "\a"

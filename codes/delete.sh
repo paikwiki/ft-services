@@ -22,5 +22,3 @@ docker rmi $(docker images -q)
 
 minikube stop;
 minikube delete;
-
-

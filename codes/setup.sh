@@ -49,5 +49,7 @@ diff ./srcs/nginx/nginx-index-config-template.yaml \
 		./srcs/nginx/nginx-index-config.yaml
 kubectl apply -f ./srcs/nginx/nginx-index-config.yaml
 kubectl apply -f ./srcs/nginx/nginx.yaml
-echo "==== Done =====================================================\n"
-echo "\n    ✨✨ Enjoy FT🌟SERVICES ✨✨    \n"
+echo "==== Done ====================================================="
+echo ""
+echo "    ✨✨ Enjoy FT🌟SERVICES ✨✨    "
+echo ""

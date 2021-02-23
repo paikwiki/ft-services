@@ -4,14 +4,6 @@ ssh-keygen -A
 adduser --disabled-password admin
 echo "admin:password" | chpasswd
 
-# mv /tmp/localhost.conf /etc/nginx/conf.d/
-# mv /tmp/proxy.conf /etc/nginx/conf.d/
-# rm /etc/nginx/conf.d/default.conf
-
-# /usr/sbin/sshd
-rc-status && touch /run/openrc/softlevel
-rc-service sshd start
-
 ln -s /var/www/conf_dir/index.html /var/www/index.html
 
 # mkdir -p /var/run/nginx

@@ -3,10 +3,10 @@
 FROM		alpine:3.12.1
 
 RUN			apk update
-RUN			apk add openrc nginx openssh --no-cache --quiet
+RUN			apk add nginx --no-cache --quiet
 
 COPY		./srcs/init.sh /tmp/
 
-EXPOSE		80 22
+EXPOSE		80 443
 
 ENTRYPOINT	["/tmp/init.sh"]

@@ -29,6 +29,9 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.name
+        livenessProbe:
+          tcpSocket:
+            port: 8086
         volumeMounts:
         - name: influxdb-config
           mountPath: /etc/influxdb.conf

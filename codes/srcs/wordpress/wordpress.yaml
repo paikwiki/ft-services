@@ -25,6 +25,12 @@ spec:
             - name: wordpress-config
               mountPath: /var/www/wordpress/conf_dir
               readOnly: false
+          livenessProbe:
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            httpGet:
+              path: /
+              port: 5050
       volumes:
         - name: wordpress-config
           configMap:

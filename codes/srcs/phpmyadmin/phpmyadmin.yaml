@@ -26,10 +26,11 @@ spec:
               mountPath: /var/www/phpmyadmin/conf_dir
               readOnly: false
           livenessProbe:
-            httpGet:
-              port: 5000
             initialDelaySeconds: 5
             periodSeconds: 5
+            httpGet:
+              path: /
+              port: 5000
       volumes:
         - name: phpmyadmin-config
           configMap:

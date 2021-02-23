@@ -1,3 +1,3 @@
 srcs/nginx/nginx-index-config.yaml
 srcs/ftps/ftps-config.yaml
-./docker_build.log
+docker_build.log

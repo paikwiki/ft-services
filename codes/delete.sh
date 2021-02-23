@@ -13,6 +13,8 @@ kubectl delete --all configmap
 kubectl delete --all pv,pvc
 
 rm -f ./srcs/nginx/nginx-index-config.yaml
+rm -f ./srcs/ftps/ftps-config.yaml
+rm -f ./docker_build.log
 
 ##delete all docker images && containers (in case)
 docker rmi $(docker images -q)
@@ -20,5 +22,5 @@ docker stop $(docker ps -a -q)
 docker rm $(docker ps -a -q)
 docker rmi $(docker images -q)
 
-minikube stop;
-minikube delete;
+minikube stop
+minikube delete

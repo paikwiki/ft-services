@@ -2,8 +2,7 @@
 
 # Minkube
 echo "==== Start Minikube ==========================================="
-minikube start --driver=virtualbox \
-			--extra-config=kubelet.authentication-token-webhook=true
+minikube start --driver=virtualbox
 minikube addons enable metallb
 echo "==== Done ====================================================="
 echo ""
@@ -13,21 +12,21 @@ eval $(minikube docker-env)
 
 # Build Dokcer images
 echo "==== Build Docker images ======================================"
-echo "    - wordpress"
+echo "  - wordpress"
 docker build -t service-wordpress ./srcs/wordpress/ >> ./docker_build.log
-echo "    - mysql"
+echo "  - mysql"
 docker build -t service-mysql ./srcs/mysql/ >> ./docker_build.log
-echo "    - phpmyadmin"
+echo "  - phpmyadmin"
 docker build -t service-phpmyadmin ./srcs/phpmyadmin/ >> ./docker_build.log
-echo "    - nginx"
+echo "  - nginx"
 docker build -t service-nginx ./srcs/nginx/ >> ./docker_build.log
-echo "    - influxdb"
+echo "  - influxdb"
 docker build -t service-influxdb ./srcs/influxdb/ >> ./docker_build.log
-echo "    - grafana"
+echo "  - grafana"
 docker build -t service-grafana ./srcs/grafana/ >> ./docker_build.log
-echo "    - ftps"
+echo "  - ftps"
 docker build -t service-ftps ./srcs/ftps/ >> ./docker_build.log
-echo "    - Done ====================================================="
+echo "==== Done ====================================================="
 echo ""
 
 # MetalLB

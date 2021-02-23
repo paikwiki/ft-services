@@ -37,6 +37,9 @@ spec:
           mountPath: /etc/telegraf.conf.d
         - name: influxdb-persistent-storage
           mountPath: /influxdata
+        livenessProbe:
+          tcpSocket:
+            port: 8086
       volumes:
       - name: influxdb-config
         configMap:

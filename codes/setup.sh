@@ -10,6 +10,7 @@
 # # Set env to Docker
 # eval $(minikube docker-env)
 
+
 # Build Dokcer images
 echo "==== Build Docker images ======================================"
 # docker build -t service-wordpress ./srcs/wordpress/
@@ -31,7 +32,11 @@ sed -e "s/strictARP: false/strictARP: true/" | \
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/namespace.yaml
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/metallb.yaml
 kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
-kubectl apply -f ./srcs/metallb_config.yaml
+MINIKUBE_IP=$(minikube ip)
+sed "s/MINIKUBE_IP/$MINIKUBE_IP/g" yaml/metallb-config_format.yaml > ./yaml/metallb-config.yaml
+kubectl apply -f yaml/metallb-config.yaml >> $LOG_PATH
+echo "==== Done ====================================================="
+echo ""
 
 # Apply MySQL, Phpmyadmin, InfluxDB, Grafana Wordpress and Ftps
 # kubectl apply -f ./srcs/mysql/mysql.yaml

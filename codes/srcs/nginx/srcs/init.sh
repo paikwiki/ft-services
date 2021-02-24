@@ -1,6 +1,5 @@
 #!/bin/sh
 
-ssh-keygen -A
 adduser --disabled-password admin
 echo "admin:password" | chpasswd
 

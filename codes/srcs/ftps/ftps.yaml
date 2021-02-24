@@ -23,6 +23,8 @@ spec:
           - name: ftps-config
             mountPath: /etc/vsftpd/vsftpd.conf
             subPath: vsftpd.conf
+          - name: ftps-storage
+            mountPath: /var/ftp
         ports:
         - containerPort: 20
         - containerPort: 21
@@ -32,6 +34,9 @@ spec:
         - name: ftps-config
           configMap:
             name: ftps-config
+        - name: ftps-storage
+          persistentVolumeClaim:
+            claimName: ftps-pv-claim
 ---
 apiVersion: v1
 kind: Service
@@ -58,3 +63,16 @@ spec:
   - name: pftp-data-1
     port: 20001
     targetPort: 20001
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ftps-pv-claim
+  labels:
+    app: ftps
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

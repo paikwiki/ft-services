@@ -13,19 +13,19 @@ eval $(minikube docker-env)
 # Build Dokcer images
 echo "==== Build Docker images ======================================"
 echo "  - wordpress"
-docker build -t service-wordpress ./srcs/wordpress/ >> ./docker_build.log
+docker build -t service-wordpress ./srcs/wordpress/ >> ./docker-build.log
 echo "  - mysql"
-docker build -t service-mysql ./srcs/mysql/ >> ./docker_build.log
+docker build -t service-mysql ./srcs/mysql/ >> ./docker-build.log
 echo "  - phpmyadmin"
-docker build -t service-phpmyadmin ./srcs/phpmyadmin/ >> ./docker_build.log
+docker build -t service-phpmyadmin ./srcs/phpmyadmin/ >> ./docker-build.log
 echo "  - nginx"
-docker build -t service-nginx ./srcs/nginx/ >> ./docker_build.log
+docker build -t service-nginx ./srcs/nginx/ >> ./docker-build.log
 echo "  - influxdb"
-docker build -t service-influxdb ./srcs/influxdb/ >> ./docker_build.log
+docker build -t service-influxdb ./srcs/influxdb/ >> ./docker-build.log
 echo "  - grafana"
-docker build -t service-grafana ./srcs/grafana/ >> ./docker_build.log
+docker build -t service-grafana ./srcs/grafana/ >> ./docker-build.log
 echo "  - ftps"
-docker build -t service-ftps ./srcs/ftps/ >> ./docker_build.log
+docker build -t service-ftps ./srcs/ftps/ >> ./docker-build.log
 echo "==== Done ====================================================="
 echo ""
 
@@ -71,5 +71,5 @@ kubectl apply -f ./srcs/ftps/ftps-config.yaml
 kubectl apply -f ./srcs/ftps/ftps.yaml
 echo "==== Done ====================================================="
 echo ""
-echo "    ✨✨ Enjoy FT🌟SERVICES ✨✨    "
+echo "    ✨✨ Enjoy FT🌟SERVICES ✨✨"
 echo ""

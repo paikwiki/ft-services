@@ -1,25 +1,25 @@
 #!/bin/sh
 
 # Minkube
-# echo "==== Start Minikube ==========================================="
-# minikube start --driver=virtualbox \
-# 			--extra-config=kubelet.authentication-token-webhook=true
-# minikube addons enable metallb
-# echo "==== Done =====================================================\n"
+echo "==== Start Minikube ==========================================="
+minikube start --driver=virtualbox \
+			--extra-config=kubelet.authentication-token-webhook=true
+minikube addons enable metallb
+echo "==== Done =====================================================\n"
 
-# # Set env to Docker
-# eval $(minikube docker-env)
+# Set env to Docker
+eval $(minikube docker-env)
 
 
 # Build Dokcer images
 echo "==== Build Docker images ======================================"
-# docker build -t service-wordpress ./srcs/wordpress/
-# docker build -t service-mysql ./srcs/mysql/
-# docker build -t service-phpmyadmin ./srcs/phpmyadmin/
-# docker build -t service-nginx ./srcs/nginx/
+docker build -t service-wordpress ./srcs/wordpress/
+docker build -t service-mysql ./srcs/mysql/
+docker build -t service-phpmyadmin ./srcs/phpmyadmin/
+docker build -t service-nginx ./srcs/nginx/
 docker build -t service-influxdb ./srcs/influxdb/
-# docker build -t service-grafana ./srcs/grafana/
-# docker build -t service-ftps ./srcs/ftps/
+docker build -t service-grafana ./srcs/grafana/
+docker build -t service-ftps ./srcs/ftps/
 echo "==== Done =====================================================\n"
 
 # MetalLB
@@ -38,13 +38,13 @@ kubectl apply -f yaml/metallb-config.yaml >> $LOG_PATH
 echo "==== Done ====================================================="
 echo ""
 
-# Apply MySQL, Phpmyadmin, InfluxDB, Grafana Wordpress and Ftps
-# kubectl apply -f ./srcs/mysql/mysql.yaml
-# kubectl apply -f ./srcs/phpmyadmin/phpmyadmin.yaml
+Apply MySQL, Phpmyadmin, InfluxDB, Grafana Wordpress and Ftps
+kubectl apply -f ./srcs/mysql/mysql.yaml
+kubectl apply -f ./srcs/phpmyadmin/phpmyadmin.yaml
 kubectl apply -f ./srcs/influxdb/influxdb.yaml
-# kubectl apply -f ./srcs/grafana/grafana.yaml
-# kubectl apply -f ./srcs/wordpress/wordpress.yaml
-# kubectl apply -f ./srcs/ftps/ftps.yaml
+kubectl apply -f ./srcs/grafana/grafana.yaml
+kubectl apply -f ./srcs/wordpress/wordpress.yaml
+kubectl apply -f ./srcs/ftps/ftps.yaml
 
 # Apply NginX server and create index page from template
 # SITEIP="$(kubectl get services|grep wordpress|awk '{print $4}')";
@@ -52,8 +52,8 @@ kubectl apply -f ./srcs/influxdb/influxdb.yaml
 # sed -e "s/FT_SITEIP/$(echo -n $SITEIP)/" > ./srcs/nginx/nginx-index-config.yaml
 # diff ./srcs/nginx/nginx-index-config-template.yaml \
 # 		./srcs/nginx/nginx-index-config.yaml
-# kubectl apply -f ./srcs/nginx/nginx-index-config.yaml
-# kubectl apply -f ./srcs/nginx/nginx.yaml
+kubectl apply -f ./srcs/nginx/nginx-index-config.yaml
+kubectl apply -f ./srcs/nginx/nginx.yaml
 echo "==== Done ====================================================="
 echo ""
 echo "    ✨✨ Enjoy FT🌟SERVICES ✨✨    "
